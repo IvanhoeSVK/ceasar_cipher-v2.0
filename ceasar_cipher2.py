@@ -1,12 +1,17 @@
 import string
 import sys
 
-alphabet = list(string.ascii_lowercase)
+alphabet_lower = list(string.ascii_lowercase)
+alphabet_upper = list(string.ascii_uppercase)
 
 def ceasar_cipher(word, shift, action):
     result = ""
     shift = shift if action else -shift
     for letter in word:
+        if letter.islower():
+            alphabet = alphabet_lower
+        else:
+            alphabet = alphabet_upper
         letter_index = alphabet.index(letter)
         new_index = (letter_index + shift) % 26
         result += alphabet[new_index]
@@ -18,7 +23,7 @@ def main():
         choice = input("Enter 1 for encode or 2 for decode: ")
         if choice == "1" or choice == "2":
             while True:
-                word = input("Enter word: ").strip().lower()
+                word = input("Enter word: ").strip()
                 if word.isalpha():
                     break
                 else:
